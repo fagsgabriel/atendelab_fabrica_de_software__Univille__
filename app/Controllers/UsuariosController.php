@@ -122,6 +122,15 @@ class UsuariosController
         }
 
         try {
+            $stmt = $this->pdo->prepare('SELECT id FROM usuarios WHERE id = :id');
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            if (!$stmt->fetch(PDO::FETCH_ASSOC)) {
+                $this->json(['erro' => 'Usuário não encontrado.'], 404);
+                return;
+            }
+
             $stmt = $this->pdo->prepare(
                 'UPDATE usuarios
                  SET nome = :nome, email = :email, perfil = :perfil, status = :status
@@ -133,11 +142,6 @@ class UsuariosController
             $stmt->bindValue(':status', $dados['status'], PDO::PARAM_STR);
             $stmt->bindValue(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
-
-            if ($stmt->rowCount() === 0) {
-                $this->json(['erro' => 'Usuário não encontrado.'], 404);
-                return;
-            }
 
             $this->json(['mensagem' => 'Usuário atualizado com sucesso.']);
         } catch (PDOException $e) {
