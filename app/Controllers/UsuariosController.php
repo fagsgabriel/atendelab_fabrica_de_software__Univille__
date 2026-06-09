@@ -10,6 +10,7 @@ class UsuariosController
     public function __construct()
     {
         require_once __DIR__ . '/../../config/database.php';
+        global $pdo;
         $this->pdo = $pdo;
     }
 
