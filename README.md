@@ -130,7 +130,7 @@ Se o projeto não estiver em `/atendelab/public/`, atualize:
 
 | E-mail | Senha |
 |--------|-------|
-| `admin@atendelab.com` | `admin123` |
+| `admin@atendelab.com` | `123456` |
 
 > Altere a senha do administrador após o primeiro acesso em ambiente real.
 
