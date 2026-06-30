@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../Middleware/auth.php';
+
 class AtendimentosController
 {
     private PDO $pdo;
@@ -72,14 +74,14 @@ class AtendimentosController
     {
         $pessoaId = filter_input(INPUT_POST, 'pessoa_id', FILTER_VALIDATE_INT);
         $tipoId = filter_input(INPUT_POST, 'tipo_atendimento_id', FILTER_VALIDATE_INT);
-        $usuarioId = filter_input(INPUT_POST, 'usuario_id', FILTER_VALIDATE_INT);
+        $usuarioId = $_SESSION['usuario']['id'] ?? null;
 
         if (
             $pessoaId === false || $pessoaId === null
             || $tipoId === false || $tipoId === null
-            || $usuarioId === false || $usuarioId === null
+            || $usuarioId === null
         ) {
-            $this->json(['erro' => 'Os campos pessoa_id, tipo_atendimento_id e usuario_id são obrigatórios e devem ser numéricos.'], 400);
+            $this->json(['erro' => 'Os campos pessoa_id e tipo_atendimento_id são obrigatórios e devem ser numéricos, e o usuário precisa estar autenticado.'], 400);
             return;
         }
 
