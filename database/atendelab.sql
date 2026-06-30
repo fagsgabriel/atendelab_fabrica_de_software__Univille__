@@ -50,9 +50,9 @@ CREATE TABLE atendimentos (
   CONSTRAINT fk_atend_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios (id)
 ) ENGINE=InnoDB;
 
--- Usuário padrão: admin@atendelab.com / admin123
+-- Usuário padrão: admin@atendelab.com / 123456
 INSERT INTO usuarios (nome, email, senha, perfil, status) VALUES
-('Administrador', 'admin@atendelab.com', '$2y$10$0OzGNJ20sL.FDVmwi0txq.LQL788u16JwZisG6ZdPj4rkiUlBuXoG', 'admin', 'ativo');
+('Administrador', 'admin@atendelab.com', '$2y$10$5B9zKiaS/ktALeFdiumRmuAGRpedPBzCsqgfRLuUnQMPwP4HdCc6S', 'admin', 'ativo');
 
 INSERT INTO tipos_atendimentos (nome, descricao, status) VALUES
 ('Declaração', 'Emissão de declarações acadêmicas', 'ativo'),
